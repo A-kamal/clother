@@ -13,10 +13,9 @@ run_linux_stat_order_test() {
 FOO=bar
 EOF
 
-  HOME="$tmp/home" XDG_DATA_HOME="$tmp/data" TRACE_FILE="$tmp/trace" bash <<'EOF'
+  HOME="$tmp/home" XDG_DATA_HOME="$tmp/data" CLOTHER_OS="Linux" TRACE_FILE="$tmp/trace" bash <<'EOF'
 set -euo pipefail
 source "/home/runner/work/clother/clother/clother.sh"
-uname() { echo "Linux"; }
 stat() {
   printf '%s\n' "$1" >> "$TRACE_FILE"
   if [[ "$1" == "-c" ]]; then
@@ -45,10 +44,9 @@ run_mac_stat_selection_test() {
 FOO=bar
 EOF
 
-  HOME="$tmp/home" XDG_DATA_HOME="$tmp/data" TRACE_FILE="$tmp/trace" bash <<'EOF'
+  HOME="$tmp/home" XDG_DATA_HOME="$tmp/data" CLOTHER_OS="Darwin" TRACE_FILE="$tmp/trace" bash <<'EOF'
 set -euo pipefail
 source "/home/runner/work/clother/clother/clother.sh"
-uname() { echo "Darwin"; }
 stat() {
   printf '%s\n' "$1" >> "$TRACE_FILE"
   if [[ "$1" == "-f" ]]; then

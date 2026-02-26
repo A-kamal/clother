@@ -15,6 +15,7 @@ umask 077
 
 readonly VERSION="2.8"
 readonly CLOTHER_DOCS="https://github.com/jolehuit/clother"
+readonly OS_NAME="${CLOTHER_OS:-$(uname -s)}"
 
 # =============================================================================
 # XDG BASE DIRECTORY SPECIFICATION
@@ -30,7 +31,7 @@ readonly CACHE_DIR="${CLOTHER_CACHE_DIR:-$XDG_CACHE_HOME/clother}"
 
 # Default bin directory: ~/.local/bin on Linux (XDG standard), ~/bin on macOS
 if [[ -z "${CLOTHER_BIN:-}" ]]; then
-  if [[ "$(uname -s)" == "Darwin" ]]; then
+  if [[ "$OS_NAME" == "Darwin" ]]; then
     BIN_DIR="$HOME/bin"
   else
     BIN_DIR="$HOME/.local/bin"
@@ -265,7 +266,7 @@ load_secrets() {
     error "Secrets file is a symlink - refusing for security"; return 1
   fi
   local perms
-  if [[ "$(uname -s)" == "Darwin" ]]; then
+  if [[ "$OS_NAME" == "Darwin" ]]; then
     perms=$(stat -f "%Lp" "$SECRETS_FILE" 2>/dev/null || echo "000")
   else
     perms=$(stat -c "%a" "$SECRETS_FILE" 2>/dev/null || stat -f "%Lp" "$SECRETS_FILE" 2>/dev/null || echo "000")
