@@ -13,7 +13,7 @@ set -euo pipefail
 IFS=$'\n\t'
 umask 077
 
-readonly VERSION="2.8"
+readonly VERSION="2.9"
 readonly CLOTHER_DOCS="https://github.com/jolehuit/clother"
 readonly OS_NAME="${CLOTHER_OS:-$(uname -s)}"
 
