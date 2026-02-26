@@ -265,7 +265,11 @@ load_secrets() {
     error "Secrets file is a symlink - refusing for security"; return 1
   fi
   local perms
-  perms=$(stat -c "%a" "$SECRETS_FILE" 2>/dev/null || stat -f "%Lp" "$SECRETS_FILE" 2>/dev/null || echo "000")
+  if [[ "$(uname -s)" == "Darwin" ]]; then
+    perms=$(stat -f "%Lp" "$SECRETS_FILE" 2>/dev/null || echo "000")
+  else
+    perms=$(stat -c "%a" "$SECRETS_FILE" 2>/dev/null || stat -f "%Lp" "$SECRETS_FILE" 2>/dev/null || echo "000")
+  fi
   if [[ "$perms" != "600" ]]; then
     warn "Fixing secrets file permissions"; chmod 600 "$SECRETS_FILE"
   fi

@@ -16,6 +16,7 @@ EOF
   HOME="$tmp/home" XDG_DATA_HOME="$tmp/data" TRACE_FILE="$tmp/trace" bash <<'EOF'
 set -euo pipefail
 source "/home/runner/work/clother/clother/clother.sh"
+uname() { echo "Linux"; }
 stat() {
   printf '%s\n' "$1" >> "$TRACE_FILE"
   if [[ "$1" == "-c" ]]; then
@@ -35,7 +36,7 @@ EOF
   pass "load_secrets prefers stat -c when available"
 }
 
-run_mac_fallback_test() {
+run_mac_stat_selection_test() {
   local tmp
   tmp="$(mktemp -d)"
   mkdir -p "$tmp/data/clother" "$tmp/home"
@@ -47,11 +48,9 @@ EOF
   HOME="$tmp/home" XDG_DATA_HOME="$tmp/data" TRACE_FILE="$tmp/trace" bash <<'EOF'
 set -euo pipefail
 source "/home/runner/work/clother/clother/clother.sh"
+uname() { echo "Darwin"; }
 stat() {
   printf '%s\n' "$1" >> "$TRACE_FILE"
-  if [[ "$1" == "-c" ]]; then
-    return 1
-  fi
   if [[ "$1" == "-f" ]]; then
     echo "600"
     return 0
@@ -61,8 +60,8 @@ stat() {
 load_secrets
 EOF
 
-  [[ "$(paste -sd' ' "$tmp/trace")" == "-c -f" ]] || fail "macOS fallback test expected stat -c then stat -f"
-  pass "load_secrets falls back to stat -f after stat -c fails"
+  [[ "$(cat "$tmp/trace")" == "-f" ]] || fail "macOS test expected only stat -f call"
+  pass "load_secrets uses stat -f directly on macOS"
 }
 
 run_line_number_test() {
@@ -91,5 +90,5 @@ EOF
 }
 
 run_linux_stat_order_test
-run_mac_fallback_test
+run_mac_stat_selection_test
 run_line_number_test
