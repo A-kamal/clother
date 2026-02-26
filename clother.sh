@@ -346,7 +346,7 @@ get_provider_def() {
     ve)         echo "ARK_API_KEY|https://ark.cn-beijing.volces.com/api/coding|doubao-seed-code-preview-latest||VolcEngine" ;;
     deepseek)   echo "DEEPSEEK_API_KEY|https://api.deepseek.com/anthropic|deepseek-chat|small=deepseek-chat|DeepSeek" ;;
     mimo)       echo "MIMO_API_KEY|https://api.xiaomimimo.com/anthropic|mimo-v2-flash|haiku=mimo-v2-flash,sonnet=mimo-v2-flash,opus=mimo-v2-flash|Xiaomi MiMo" ;;
-    modelstudio) echo "DASHSCOPE_API_KEY|https://dashscope-intl.aliyuncs.com/apps/anthropic|qwen3.5-plus||Alibaba Model Studio" ;;
+    modelstudio) echo "DASHSCOPE_API_KEY|https://coding-intl.dashscope.aliyuncs.com/apps/anthropic|qwen3.5-plus||Alibaba Model Studio" ;;
     # Local providers (no API key needed)
     ollama)     echo "@ollama|http://localhost:11434|||Ollama (Local)" ;;
     lmstudio)   echo "@lmstudio|http://localhost:1234|||LM Studio (Local)" ;;
