@@ -11,7 +11,7 @@ run_modelstudio_provider_def_test() {
   local def
   def="$(get_provider_def "modelstudio")"
 
-  [[ "$def" == "DASHSCOPE_API_KEY|https://dashscope-intl.aliyuncs.com/compatible-mode/v1|qwen-plus||Alibaba Model Studio" ]] \
+  [[ "$def" == "DASHSCOPE_API_KEY|https://dashscope-intl.aliyuncs.com/apps/anthropic|qwen3.5-plus||Alibaba Model Studio" ]] \
     || fail "modelstudio provider definition mismatch"
   pass "modelstudio provider definition is correct"
 }
