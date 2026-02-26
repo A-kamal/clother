@@ -47,7 +47,7 @@ clother config                          # Configure providers
 | `clother-moonshot` | Moonshot AI | kimi-k2.5 | [moonshot.ai](https://moonshot.ai) |
 | `clother-deepseek` | DeepSeek | deepseek-chat | [deepseek.com](https://platform.deepseek.com) |
 | `clother-mimo` | Xiaomi MiMo | mimo-v2-flash | [xiaomimimo.com](https://platform.xiaomimimo.com) |
-| `clother-modelstudio` | Alibaba Model Studio | qwen-plus | [modelstudio](https://www.alibabacloud.com/help/en/model-studio/) |
+| `clother-modelstudio` | Alibaba Model Studio | qwen-plus | [alibabacloud.com](https://www.alibabacloud.com/help/en/model-studio/) |
 
 ### OpenRouter (100+ Models)
 

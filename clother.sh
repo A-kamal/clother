@@ -450,7 +450,7 @@ ${BOLD}PROVIDERS${NC}
     moonshot           Moonshot AI
     deepseek           DeepSeek
     mimo               Xiaomi MiMo
-    modelstudio        Alibaba Model Studio (Qwen Plus)
+    modelstudio        Alibaba Model Studio
 
   ${DIM}Local${NC}
     ollama             Ollama (localhost:11434)
