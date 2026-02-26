@@ -21,7 +21,7 @@
 curl -fsSL https://claude.ai/install.sh | bash
 
 # 2. Install Clother
-curl -fsSL https://raw.githubusercontent.com/jolehuit/clother/main/clother.sh | bash
+curl -fsSL https://raw.githubusercontent.com/A-kamal/clother/main/clother.sh | bash
 ```
 
 ## Quick Start
@@ -160,11 +160,11 @@ You can override this with `--bin-dir` or the `CLOTHER_BIN` environment variable
 
 ```bash
 # Using --bin-dir flag
-curl -fsSL https://raw.githubusercontent.com/jolehuit/clother/main/clother.sh | bash -s -- --bin-dir ~/.local/bin
+curl -fsSL https://raw.githubusercontent.com/A-kamal/clother/main/clother.sh | bash -s -- --bin-dir ~/.local/bin
 
 # Using environment variable
 export CLOTHER_BIN="$HOME/.local/bin"
-curl -fsSL https://raw.githubusercontent.com/jolehuit/clother/main/clother.sh | bash
+curl -fsSL https://raw.githubusercontent.com/A-kamal/clother/main/clother.sh | bash
 ```
 
 Make sure the chosen directory is in your `PATH`.
