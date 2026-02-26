@@ -29,6 +29,7 @@ curl -fsSL https://raw.githubusercontent.com/jolehuit/clother/main/clother.sh | 
 ```bash
 clother-native                          # Use your Claude Pro/Team subscription
 clother-zai                             # Z.AI (GLM-5)
+clother-modelstudio                     # Alibaba Model Studio (Qwen Plus)
 clother-ollama --model qwen3-coder      # Local with Ollama
 clother config                          # Configure providers
 ```
@@ -46,6 +47,7 @@ clother config                          # Configure providers
 | `clother-moonshot` | Moonshot AI | kimi-k2.5 | [moonshot.ai](https://moonshot.ai) |
 | `clother-deepseek` | DeepSeek | deepseek-chat | [deepseek.com](https://platform.deepseek.com) |
 | `clother-mimo` | Xiaomi MiMo | mimo-v2-flash | [xiaomimimo.com](https://platform.xiaomimimo.com) |
+| `clother-modelstudio` | Alibaba Model Studio | qwen-plus | [modelstudio](https://www.alibabacloud.com/help/en/model-studio/) |
 
 ### OpenRouter (100+ Models)
 
