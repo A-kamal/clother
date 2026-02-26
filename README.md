@@ -21,7 +21,7 @@
 curl -fsSL https://claude.ai/install.sh | bash
 
 # 2. Install Clother
-curl -fsSL https://raw.githubusercontent.com/jolehuit/clother/main/clother.sh | bash
+curl -fsSL https://raw.githubusercontent.com/A-kamal/clother/main/clother.sh | bash
 ```
 
 ## Quick Start
@@ -29,6 +29,7 @@ curl -fsSL https://raw.githubusercontent.com/jolehuit/clother/main/clother.sh | 
 ```bash
 clother-native                          # Use your Claude Pro/Team subscription
 clother-zai                             # Z.AI (GLM-5)
+clother-modelstudio                     # Alibaba Model Studio (qwen3.5-plus)
 clother-ollama --model qwen3-coder      # Local with Ollama
 clother config                          # Configure providers
 ```
@@ -46,6 +47,7 @@ clother config                          # Configure providers
 | `clother-moonshot` | Moonshot AI | kimi-k2.5 | [moonshot.ai](https://moonshot.ai) |
 | `clother-deepseek` | DeepSeek | deepseek-chat | [deepseek.com](https://platform.deepseek.com) |
 | `clother-mimo` | Xiaomi MiMo | mimo-v2-flash | [xiaomimimo.com](https://platform.xiaomimimo.com) |
+| `clother-modelstudio` | Alibaba Model Studio | qwen3.5-plus | [alibabacloud.com](https://www.alibabacloud.com/help/en/model-studio/) |
 
 ### OpenRouter (100+ Models)
 
@@ -158,11 +160,11 @@ You can override this with `--bin-dir` or the `CLOTHER_BIN` environment variable
 
 ```bash
 # Using --bin-dir flag
-curl -fsSL https://raw.githubusercontent.com/jolehuit/clother/main/clother.sh | bash -s -- --bin-dir ~/.local/bin
+curl -fsSL https://raw.githubusercontent.com/A-kamal/clother/main/clother.sh | bash -s -- --bin-dir ~/.local/bin
 
 # Using environment variable
 export CLOTHER_BIN="$HOME/.local/bin"
-curl -fsSL https://raw.githubusercontent.com/jolehuit/clother/main/clother.sh | bash
+curl -fsSL https://raw.githubusercontent.com/A-kamal/clother/main/clother.sh | bash
 ```
 
 Make sure the chosen directory is in your `PATH`.

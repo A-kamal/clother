@@ -346,6 +346,7 @@ get_provider_def() {
     ve)         echo "ARK_API_KEY|https://ark.cn-beijing.volces.com/api/coding|doubao-seed-code-preview-latest||VolcEngine" ;;
     deepseek)   echo "DEEPSEEK_API_KEY|https://api.deepseek.com/anthropic|deepseek-chat|small=deepseek-chat|DeepSeek" ;;
     mimo)       echo "MIMO_API_KEY|https://api.xiaomimimo.com/anthropic|mimo-v2-flash|haiku=mimo-v2-flash,sonnet=mimo-v2-flash,opus=mimo-v2-flash|Xiaomi MiMo" ;;
+    modelstudio) echo "DASHSCOPE_API_KEY|https://dashscope-intl.aliyuncs.com/apps/anthropic|qwen3.5-plus||Alibaba Model Studio" ;;
     # Local providers (no API key needed)
     ollama)     echo "@ollama|http://localhost:11434|||Ollama (Local)" ;;
     lmstudio)   echo "@lmstudio|http://localhost:1234|||LM Studio (Local)" ;;
@@ -449,6 +450,7 @@ ${BOLD}PROVIDERS${NC}
     moonshot           Moonshot AI
     deepseek           DeepSeek
     mimo               Xiaomi MiMo
+    modelstudio        Alibaba Model Studio
 
   ${DIM}Local${NC}
     ollama             Ollama (localhost:11434)
@@ -496,7 +498,7 @@ ${BOLD}EXAMPLES${NC}
 
 ${BOLD}PROVIDERS${NC}
   native, zai, zai-cn, minimax, minimax-cn, kimi,
-  moonshot, ve, deepseek, mimo, ollama, lmstudio,
+  moonshot, ve, deepseek, mimo, modelstudio, ollama, lmstudio,
   llamacpp, openrouter, custom
 EOF
       ;;
@@ -575,7 +577,7 @@ cmd_config() {
 
   # Count configured
   local configured=0
-  for p in native zai zai-cn minimax minimax-cn kimi moonshot ve deepseek mimo ollama lmstudio llamacpp; do
+  for p in native zai zai-cn minimax minimax-cn kimi moonshot ve deepseek mimo modelstudio ollama lmstudio llamacpp; do
     is_provider_configured "$p" && ((++configured)) || true
   done
   echo -e "${DIM}$configured providers configured${NC}"
@@ -600,8 +602,8 @@ cmd_config() {
 
   # International
   echo -e "${BOLD}INTERNATIONAL${NC}"
-  local -a intl_providers=(zai minimax kimi moonshot deepseek mimo)
-  local -a intl_names=("Z.AI" "MiniMax" "Kimi K2" "Moonshot AI" "DeepSeek" "Xiaomi MiMo")
+  local -a intl_providers=(zai minimax kimi moonshot deepseek mimo modelstudio)
+  local -a intl_names=("Z.AI" "MiniMax" "Kimi K2" "Moonshot AI" "DeepSeek" "Xiaomi MiMo" "Alibaba Model Studio")
   for i in "${!intl_providers[@]}"; do
     local p="${intl_providers[$i]}"
     local status; is_provider_configured "$p" && status="${GREEN}${SYM_CHECK}${NC}" || status="${DIM}${SYM_UNCHECK}${NC}"
@@ -616,14 +618,14 @@ cmd_config() {
   for i in "${!local_providers[@]}"; do
     local p="${local_providers[$i]}"
     local status; is_provider_configured "$p" && status="${GREEN}${SYM_CHECK}${NC}" || status="${DIM}${SYM_UNCHECK}${NC}"
-    printf "  ${CYAN}%-2s${NC} %-12s %-24s %s\n" "$((i+11))" "$p" "${local_names[$i]}" "$status"
+    printf "  ${CYAN}%-2s${NC} %-12s %-24s %s\n" "$((i+12))" "$p" "${local_names[$i]}" "$status"
   done
   echo
 
   # Advanced
   echo -e "${BOLD}ADVANCED${NC}"
-  printf "  ${CYAN}%-2s${NC} %-12s %-24s\n" "14" "openrouter" "100+ models (native API)"
-  printf "  ${CYAN}%-2s${NC} %-12s %-24s\n" "15" "custom" "Anthropic-compatible"
+  printf "  ${CYAN}%-2s${NC} %-12s %-24s\n" "15" "openrouter" "100+ models (native API)"
+  printf "  ${CYAN}%-2s${NC} %-12s %-24s\n" "16" "custom" "Anthropic-compatible"
   echo
 
   draw_separator 54
@@ -644,11 +646,12 @@ cmd_config() {
     8)  config_provider "moonshot" ;;
     9)  config_provider "deepseek" ;;
     10) config_provider "mimo" ;;
-    11) config_local_provider "ollama" ;;
-    12) config_local_provider "lmstudio" ;;
-    13) config_local_provider "llamacpp" ;;
-    14) config_openrouter ;;
-    15) config_custom ;;
+    11) config_provider "modelstudio" ;;
+    12) config_local_provider "ollama" ;;
+    13) config_local_provider "lmstudio" ;;
+    14) config_local_provider "llamacpp" ;;
+    15) config_openrouter ;;
+    16) config_custom ;;
     t|T) cmd_test ;;
     q|Q) log "Cancelled" ;;
     *)  error "Invalid choice: $choice" ;;
@@ -1203,7 +1206,7 @@ EOF
   chmod +x "$BIN_DIR/clother-native"
 
   # Generate standard launchers
-  local providers=(zai zai-cn minimax minimax-cn kimi moonshot ve deepseek mimo)
+  local providers=(zai zai-cn minimax minimax-cn kimi moonshot ve deepseek mimo modelstudio)
   for p in "${providers[@]}"; do
     local def; def=$(get_provider_def "$p")
     IFS='|' read -r keyvar baseurl model model_opts _ <<< "$def"
